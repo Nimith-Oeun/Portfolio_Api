@@ -1,16 +1,4 @@
-server:
-  port: 8090
-
+# Spring Boot application configuration for development environment
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/Portfolio
-    username: postgres
-    password: "P@ssw0rd()SQL"
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
+  profiles:
+    active: dev

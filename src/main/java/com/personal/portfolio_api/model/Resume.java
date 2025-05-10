@@ -15,16 +15,5 @@ public class Resume extends BaseEntity{
     @Column(name = "resume_Description")
     private String resumeDescription;
 
-    @OneToOne
-    @JoinColumn(name = "summary_id")
-    private Summary summary;
-
-    @OneToOne
-    @JoinColumn(name = "education_id")
-    private Education education;
-
-    @OneToOne
-    @JoinColumn(name = "experience_id")
-    private Experienc experience;
 
 }

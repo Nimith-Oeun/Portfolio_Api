@@ -1,0 +1,25 @@
+package com.personal.portfolio_api.dto;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.personal.portfolio_api.model.Resume;
+import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToOne;
+import lombok.Data;
+
+@Data
+public class ExperienceDTO {
+
+    @JsonProperty( "company_name")
+    private String companyName;
+    @JsonProperty( "job_title")
+    private String jobTitle;
+    @JsonProperty("start_date")
+    private String startDate;
+    @JsonProperty("end_date")
+    private String endDate;
+    private String description;
+    @JsonProperty("resume_id")
+    private Long resumeId;
+
+}

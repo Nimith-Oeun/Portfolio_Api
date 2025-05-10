@@ -1,6 +1,5 @@
 package com.personal.portfolio_api.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.personal.portfolio_api.enumerat.SummaryStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -31,9 +30,11 @@ public class Summary extends BaseEntity{
     @Column(name = "phone_number", nullable = false , unique = true)
     private String phoneNumber;
 
-
     @Enumerated(EnumType.STRING)
     private SummaryStatus status;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private Resume resumeId;
 
 
 

@@ -15,4 +15,6 @@ public class SummaryDTO {
     private String phoneNumber;
     private String address;
     private String Status;
+    @JsonProperty("resume_id")
+    private Long resumeId;
 }

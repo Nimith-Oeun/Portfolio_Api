@@ -14,10 +14,17 @@ public class Education extends BaseEntity{
 
     @Column(name = "university_name")
     private String universityName;
+
     private String mejor;
+
     @Column(name = "start_date")
     private String startDate;
+
     @Column(name = "end_date")
     private String endDate;
+
     private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Resume resumeId;
 }

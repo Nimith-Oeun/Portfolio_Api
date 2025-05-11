@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "tbl_profile_photo")
-public class ProfilePhoto extends BaseEntity{
+@Table(name = "tbl_cover_photo")
+public class CoverPhoto extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

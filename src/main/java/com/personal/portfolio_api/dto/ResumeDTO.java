@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class ResumeDTO {
-
+    @JsonProperty("resume_description")
     private String resumeDescription;
 
     @JsonProperty("summary_info")

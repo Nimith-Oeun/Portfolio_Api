@@ -1,9 +1,6 @@
 package com.personal.portfolio_api.mapper;
 
-import com.personal.portfolio_api.dto.EducationDTO;
-import com.personal.portfolio_api.dto.ExperienceDTO;
-import com.personal.portfolio_api.dto.ResumeDTO;
-import com.personal.portfolio_api.dto.SummaryDTO;
+import com.personal.portfolio_api.dto.*;
 import com.personal.portfolio_api.model.Education;
 import com.personal.portfolio_api.model.Experienc;
 import com.personal.portfolio_api.model.Resume;
@@ -25,17 +22,20 @@ public interface ResumeMapper {
     Resume mapToResume(ResumeDTO resumeDTO);
     ResumeDTO mapToResumeDTO(Resume resume);
 
+
 //    Map Summary
-    @Mapping(target = "resumeId", source = "resumeId")
     Summary mapToSummary(SummaryDTO summaryDTO);
+    List<SummaryResponeDTO> mapToSummaryResponeDTO(List<Summary> summary);
 
 //    Map Education
 
     List<Education> mapToEducation(List<EducationDTO> educationDTO);
+    List<EducationResponeDTO> mapToEducationReespone(List<Education> education);
 
 //    Map Experience
 
     List<Experienc> mapToExperience(List<ExperienceDTO> experienceDTO);
+    List<ExperienceResponeDTO> mapToExperienceReespone(List<Experienc> experience);
 
     // Custom mapping for Long to Resume
     default Resume map(Long resumeId) {

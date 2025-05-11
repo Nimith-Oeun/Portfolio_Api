@@ -12,8 +12,12 @@ public class Sociel extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "facebook" , unique = true)
     private String facebook;
+    @Column(name = "twitter" , unique = true)
     private String twitter;
+    @Column(name = "instagram" , unique = true)
     private String instagram;
-    private String LinkedIn;
+    @Column(name = "lingIn" , unique = true)
+    private String linkedIn;
 }

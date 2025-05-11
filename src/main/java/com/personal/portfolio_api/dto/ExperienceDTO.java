@@ -19,7 +19,5 @@ public class ExperienceDTO {
     @JsonProperty("end_date")
     private String endDate;
     private String description;
-    @JsonProperty("resume_id")
-    private Long resumeId;
 
 }

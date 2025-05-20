@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "tbl_skill")
-public class Skill extends BaseEntity{
+@Table(name = "tbl_project_photo")
+public class ProjectPhoto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,4 @@ public class Skill extends BaseEntity{
 
     @Column(name = "Part_Upload")
     private String partUpload;
-
-    @Column(name = "skill_Title")
-    private String skillTitle;
 }

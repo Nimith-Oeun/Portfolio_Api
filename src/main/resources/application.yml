@@ -1,4 +1,4 @@
 # Spring Boot application configuration for development environment
 spring:
   profiles:
-    active: dev
+    active: qa

@@ -40,25 +40,29 @@ public class ResumeController {
     }
 
     @PutMapping("/{id}/description")
-    public ResponseEntity<?> updateResumeDescription(@PathVariable Long id, @RequestBody ResumeDTO resumeDTO) {
+    public ResponseEntity<?> updateResumeDescription(@PathVariable Long id,
+                                                     @RequestBody ResumeDTO resumeDTO) {
         resumeService.updateResume(id, resumeDTO);
         return ResponseEntity.ok(ApiResponeUtils.successRespone("Update Resume Success"));
     }
 
     @PutMapping("/{id}/experience")
-    public ResponseEntity<?> updateExperience(@PathVariable Long id, @RequestBody ExperienceDTO experienceDTO) {
+    public ResponseEntity<?> updateExperience(@PathVariable Long id,
+                                              @RequestBody ExperienceDTO experienceDTO) {
         experienceService.updateExperienc(id, experienceDTO);
         return ResponseEntity.ok(ApiResponeUtils.successRespone("Update Summary Success"));
     }
 
     @PutMapping("/{id}/education")
-    public ResponseEntity<?> updateEducation(@PathVariable Long id, @RequestBody EducationDTO educationDTO) {
+    public ResponseEntity<?> updateEducation(@PathVariable Long id,
+                                             @RequestBody EducationDTO educationDTO) {
         educationService.updateEducation(id, educationDTO);
         return ResponseEntity.ok(ApiResponeUtils.successRespone("Update Education Success"));
     }
 
     @PutMapping("/{id}/summary")
-    public ResponseEntity<?> updateSummary(@PathVariable Long id, @RequestBody SummaryDTO summaryDTO) {
+    public ResponseEntity<?> updateSummary(@PathVariable Long id,
+                                           @RequestBody SummaryDTO summaryDTO) {
         Summary updateSummary = summaryService.updateSummary(id, summaryDTO);
         return ResponseEntity.ok(ApiResponeUtils.successRespone(ApiResponeUtils.successRespone(" Update Summary Success")));
     }

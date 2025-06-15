@@ -53,4 +53,10 @@ public class ProjectPhotoServiceImpl implements ProjectPhotoService {
             throw new RuntimeException("Error while uploading file: " + e.getMessage());
         }
     }
+
+    @Override
+    public ProjectPhoto getProjectPhotoById(Long id) {
+    return projectPhotoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Project photo not found with id: " + id));
+    }
 }

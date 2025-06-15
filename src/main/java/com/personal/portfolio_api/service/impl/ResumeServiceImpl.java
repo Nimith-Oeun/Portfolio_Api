@@ -139,8 +139,10 @@ public class ResumeServiceImpl implements ResumeService {
                 .build();
     }
 
+    @Transactional
     @Override
     public void deleteResume(Long id) {
+
         Resume resumeId = getResumeById(id);
 
         // Delete Summary

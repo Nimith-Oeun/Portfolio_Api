@@ -37,7 +37,8 @@ public class SocielController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody SocielDTO socielDTO) {
+    public ResponseEntity<?> update(@PathVariable Long id,
+                                    @RequestBody SocielDTO socielDTO) {
         Sociel sociel = socielService.update(id, socielDTO);
         return ResponseEntity.ok(ApiResponeUtils.successRespone(SocielMapper.INSTANCE.mapToSocielDTO(sociel)));
     }

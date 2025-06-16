@@ -58,4 +58,10 @@ public class ProfilePhotoServiceImpl implements ProfilePhotoService {
 
     }
 
+    @Override
+    public ProfilePhoto getProfilePhotoById(Long id) {
+        return profilePhotoRepository.findById(id)
+                .orElseThrow(() -> new ResoureNoteFoundException("Profile photo not found with id: " + id));
+    }
+
 }

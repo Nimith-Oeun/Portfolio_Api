@@ -36,21 +36,30 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project updateProject(Long id, ProjectRequest projectRequest) {
-        return null;
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new ResoureNoteFoundException("Project not found with id: " + id));
+
+        project.setPortfolioDescription(projectRequest.getPortfolioDescription());
+        project.setProjectTitle(projectRequest.getProjectTitle());
+        project.setProjectDescription(projectRequest.getProjectDescription());
+
+        return projectRepository.save(project);
     }
 
     @Override
     public Project getProjectById(Long id) {
-        return null;
+        return projectRepository.findById(id)
+                .orElseThrow(() -> new ResoureNoteFoundException("Project not found with id: " + id));
     }
 
     @Override
     public List<Project> getAllProjects() {
-        return List.of();
+        return projectRepository.findAll();
     }
 
     @Override
     public void deleteProject(Long id) {
-
+        getProjectById(id); // Ensure the project exists before deleting
+        projectRepository.deleteById(id);
     }
 }

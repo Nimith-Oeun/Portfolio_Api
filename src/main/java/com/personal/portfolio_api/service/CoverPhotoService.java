@@ -8,4 +8,5 @@ import org.springframework.web.multipart.MultipartFile;
 public interface CoverPhotoService {
 
     CoverPhoto uploadCover(MultipartFile file );
+    CoverPhoto getCoverPhotoById(Long id);
 }

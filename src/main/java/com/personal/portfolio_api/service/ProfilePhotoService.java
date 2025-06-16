@@ -8,4 +8,5 @@ import org.springframework.web.multipart.MultipartFile;
 public interface ProfilePhotoService {
 
     ProfilePhoto uploadProfile(MultipartFile file );
+    ProfilePhoto getProfilePhotoById(Long id);
 }

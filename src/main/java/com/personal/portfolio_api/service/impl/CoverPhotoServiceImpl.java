@@ -58,4 +58,10 @@ public class CoverPhotoServiceImpl implements CoverPhotoService {
 
     }
 
+    @Override
+    public CoverPhoto getCoverPhotoById(Long id) {
+        return coverPhotoRepository.findById(id)
+                .orElseThrow(() -> new ResoureNoteFoundException("Cover photo not found with id: " + id));
+    }
+
 }

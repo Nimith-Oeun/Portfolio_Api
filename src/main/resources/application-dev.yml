@@ -1,4 +1,7 @@
 # Spring Boot application configuration for development environment
+Server:
+  port: 8091
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/portfolio
@@ -13,5 +16,21 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
 
-Server:
-  port: 8091
+
+  mail:
+    host: localhost
+    port: 1025
+    username: hello
+    password: hello
+
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: "*"
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000

@@ -15,6 +15,7 @@ public class ProjectRequest {
     @JsonProperty("project_description")
     private String projectDescription;
 
+    @JsonProperty("project_photo_id")
     private long projectPhotoId;
 
 }

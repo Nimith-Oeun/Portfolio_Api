@@ -7,6 +7,7 @@ import com.personal.portfolio_api.exception.BadRequestException;
 import com.personal.portfolio_api.service.SkillService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +22,7 @@ public class UploadSkillController {
     private final SkillService skillService;
 
 
-    @PostMapping("")
+    @PostMapping(path = "" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> uploadSkill(@RequestParam("file") MultipartFile file , SkillDTO skillDTO) {
 
         try{

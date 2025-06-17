@@ -8,6 +8,7 @@ import com.personal.portfolio_api.service.ProfilePhotoService;
 import com.personal.portfolio_api.service.ProjectPhotoService;
 import com.personal.portfolio_api.service.ProjectService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,7 +30,7 @@ public class ProjectController {
         return ResponseEntity.ok(ApiResponeUtils.successRespone(projectMapper.mapToProjectResponse(project)));
     }
 
-    @PostMapping("/upload-photo")
+    @PostMapping(path = "/upload-photo" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> uploadProjectPhoto(@RequestParam("file")MultipartFile multipartFile) {
         try {
             projectPhotoService.uploadProjectPhoto(multipartFile);

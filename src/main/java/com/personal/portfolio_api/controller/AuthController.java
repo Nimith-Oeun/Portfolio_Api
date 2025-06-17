@@ -1,23 +1,24 @@
 package com.personal.portfolio_api.controller;
 
 import com.personal.portfolio_api.dto.RegisterRequest;
-import com.personal.portfolio_api.dto.UserProfileRequest;
 import com.personal.portfolio_api.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/portfolio/auth")
 @RequiredArgsConstructor
-public class RegisterController {
+public class AuthController {
 
     private final UserProfileService userProfileService;
+    private final AuthenticationManager authenticationManager;
 
     @PostMapping("")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest) {
         userProfileService.createUserProfile(registerRequest);
-        return ResponseEntity.ok("User registered successfully");
+        return ResponseEntity.ok("Please Activate your account by clicking the link sent to your email.");
     }
 
     @GetMapping("confirm")
@@ -25,4 +26,5 @@ public class RegisterController {
         String confirmToken = userProfileService.confirmToken(token);
         return ResponseEntity.ok(confirmToken);
     }
+
 }

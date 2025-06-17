@@ -31,7 +31,7 @@ public class ConfirmationToken {
 
     @ManyToOne
     @JoinColumn(
-            name = "app_user_id",
+            name = "user_profile_id",
             referencedColumnName = "id",
             nullable = false
     )

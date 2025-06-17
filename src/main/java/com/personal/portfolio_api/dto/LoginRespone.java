@@ -1,10 +1,12 @@
 package com.personal.portfolio_api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class UserProfileRespone {
+@Builder
+public class LoginRespone {
 
     private String firstName;
 
@@ -24,12 +26,11 @@ public class UserProfileRespone {
 
     private String city;
 
-    private String freelance ;
+    private boolean freelance;
 
     private String subject;
 
     private String profileDescription;
 
     private String subjectDescription;
-
 }

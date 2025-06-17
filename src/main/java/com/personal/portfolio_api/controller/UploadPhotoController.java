@@ -12,6 +12,7 @@ import com.personal.portfolio_api.service.SocielService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,7 +30,7 @@ public class UploadPhotoController {
     private final CoverPhotoService coverPhotoService;
 
 
-    @PostMapping("/profile")
+    @PostMapping(path = "/profile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> uploadProfile(@RequestParam("file") MultipartFile file) {
 
         try{
@@ -42,7 +43,7 @@ public class UploadPhotoController {
         }
     }
 
-    @PostMapping("/cover")
+    @PostMapping(path = "/cover" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> uploadCover(@RequestParam("file") MultipartFile file) {
 
         try{

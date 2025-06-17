@@ -2,6 +2,7 @@ package com.personal.portfolio_api.service.impl;
 
 import com.personal.portfolio_api.Email.EmailPlatform;
 import com.personal.portfolio_api.Email.EmailSender;
+import com.personal.portfolio_api.dto.LoginRequest;
 import com.personal.portfolio_api.dto.RegisterRequest;
 import com.personal.portfolio_api.dto.UserProfileRequest;
 import com.personal.portfolio_api.enumerat.Role;
@@ -13,6 +14,10 @@ import com.personal.portfolio_api.service.UserProfileService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,14 +34,12 @@ public class UserProfileServiceImpl implements UserProfileService {
     private final PasswordEncoder passwordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
-    private final EmailPlatform buildEmail;
-
-
 
     @Override
     public Optional<UserProfile> findByEmail(String email) {
         UserProfile userProfile = profileRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User profile not found for email: " + email));
+        log.info("User profile found for email: {}", email);
         return Optional.ofNullable(userProfile);
     }
 
@@ -52,6 +55,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         userProfile.setEmail(registerRequest.getEmail());
         userProfile.setFirstName(registerRequest.getFirstName());
         userProfile.setLastName(registerRequest.getLastName());
+        userProfile.setUsername(registerRequest.getUsername());
         userProfile.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         userProfile.setRole(Role.ADMIN);
 
@@ -74,10 +78,10 @@ public class UserProfileServiceImpl implements UserProfileService {
         /*
             TODO: send to Email
          */
-        String link = "http://localhost:8091/api/v1/portfolio/auth/confirm?token=" + token;
+        String link = "http://localhost:8080/api/v1/portfolio/auth/confirm?token=" + token;
         emailSender.send(
                 registerRequest.getEmail(),
-                buildEmail.buildEmail(registerRequest.getFirstName(),link)
+                EmailPlatform.buildEmail(registerRequest.getFirstName(),link)
         );
 
         return userProfile;

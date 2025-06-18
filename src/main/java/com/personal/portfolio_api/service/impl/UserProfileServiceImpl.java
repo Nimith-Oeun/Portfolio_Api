@@ -15,6 +15,7 @@ import com.personal.portfolio_api.service.UserProfileService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -35,6 +37,9 @@ public class UserProfileServiceImpl implements UserProfileService {
     private final PasswordEncoder passwordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
+
+    @Value("${server.port}")
+    private String port;
 
     @Override
     public Optional<UserProfile> findByEmail(String email) {
@@ -79,7 +84,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         /*
             TODO: send to Email
          */
-        String link = "http://localhost:8080/api/v1/portfolio/auth/confirm?token=" + token;
+        String link = "http://localhost:"+ port +"/api/v1/portfolio/auth/confirm?token=" + token;
         emailSender.send(
                 registerRequest.getEmail(),
                 EmailPlatform.buildEmail(registerRequest.getFirstName(),link)
@@ -87,7 +92,6 @@ public class UserProfileServiceImpl implements UserProfileService {
 
         return userProfile;
     }
-
 
     @Override
     public UserProfile updateUserProfile(Long id, UserProfileRequest userProfileRequest) {
@@ -105,6 +109,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         userProfile.setCity(userProfileRequest.getCity());
         userProfile.setFreelance(userProfileRequest.isFreelance());
         userProfile.setSubject(userProfileRequest.getSubject());
+        userProfile.setProfileDescription(userProfileRequest.getProfileDescription());
         userProfile.setSubjectDescription(userProfileRequest.getSubjectDescription());
 
         return profileRepository.save(userProfile);
@@ -114,6 +119,11 @@ public class UserProfileServiceImpl implements UserProfileService {
     public UserProfile getUserProfileById(Long id) {
         return profileRepository.findById(id)
                 .orElseThrow(() -> new ResoureNoteFoundException("User profile not found with id: " + id));
+    }
+
+    @Override
+    public List<UserProfile> getAllUserProfiles() {
+        return profileRepository.findAll();
     }
 
     @Override

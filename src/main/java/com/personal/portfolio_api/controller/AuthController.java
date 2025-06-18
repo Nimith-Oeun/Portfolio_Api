@@ -1,6 +1,7 @@
 package com.personal.portfolio_api.controller;
 
 import com.personal.portfolio_api.dto.RegisterRequest;
+import com.personal.portfolio_api.dto.UserProfileRequest;
 import com.personal.portfolio_api.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final UserProfileService userProfileService;
-    private final AuthenticationManager authenticationManager;
 
     @PostMapping("")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest) {
@@ -26,5 +26,7 @@ public class AuthController {
         String confirmToken = userProfileService.confirmToken(token);
         return ResponseEntity.ok(confirmToken);
     }
+
+
 
 }

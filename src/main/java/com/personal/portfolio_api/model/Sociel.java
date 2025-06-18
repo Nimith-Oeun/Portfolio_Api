@@ -14,10 +14,16 @@ public class Sociel extends BaseEntity{
 
     @Column(name = "facebook" , unique = true)
     private String facebook;
+
     @Column(name = "twitter" , unique = true)
     private String twitter;
+
     @Column(name = "instagram" , unique = true)
     private String instagram;
+
     @Column(name = "lingIn" , unique = true)
     private String linkedIn;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private UserProfile userProfile;
 }

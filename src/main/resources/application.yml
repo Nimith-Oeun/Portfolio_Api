@@ -4,13 +4,13 @@ server:
 
 spring:
   profiles:
-    active: qa
+    active: dev
   application:
     name: portfolio_API
 
   # Database configuration
   datasource:
-    url: jdbc:postgresql://${MyServer.Database.HOST}/Portfolio
+    url: jdbc:postgresql://${MyServer.Database.HOST}/${MyServer.Database.DBNAME}
     username: ${MyServer.Database.USER}
     password: "${MyServer.Database.PASS}"
   jpa:

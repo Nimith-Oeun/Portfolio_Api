@@ -14,4 +14,6 @@ public class SocielDTO {
     private String instagram;
 
     private String LinkedIn;
+
+    private Long userId;
 }

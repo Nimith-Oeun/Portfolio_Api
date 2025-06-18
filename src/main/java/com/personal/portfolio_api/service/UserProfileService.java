@@ -6,6 +6,7 @@ import com.personal.portfolio_api.dto.UserProfileRequest;
 import com.personal.portfolio_api.model.UserProfile;
 import org.springframework.security.core.Authentication;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserProfileService {
@@ -13,5 +14,6 @@ public interface UserProfileService {
     UserProfile updateUserProfile(Long id, UserProfileRequest userProfileRequest);
     UserProfile getUserProfileById(Long id);
     UserProfile createUserProfile(RegisterRequest registerRequest);
+    List<UserProfile> getAllUserProfiles();
     String confirmToken(String token);
 }

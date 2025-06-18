@@ -18,20 +18,21 @@ import java.util.List;
 public class SocielController {
 
     private final SocielService socielService;
+    private final SocielMapper socielMapper;
 
 
 
     @PostMapping("/create")
     public ResponseEntity<?> createSociel(@RequestBody SocielDTO socielDTO) {
         Sociel sociel = socielService.create(socielDTO);
-        return ResponseEntity.ok(ApiResponeUtils.successRespone(SocielMapper.INSTANCE.mapToSocielDTO(sociel)));
+        return ResponseEntity.ok(ApiResponeUtils.successRespone(socielMapper.mapToSocielDTO(sociel)));
     }
 
     @GetMapping("")
     public ResponseEntity<?> getAll() {
         List<Sociel> sociels = socielService.getAll();
         List<SocielDTO> socielDTOList = sociels.stream()
-                .map(SocielMapper.INSTANCE::mapToSocielDTO)
+                .map(socielMapper::mapToSocielDTO)
                 .toList();
         return ResponseEntity.ok(ApiResponeUtils.successRespone(socielDTOList));
     }
@@ -40,7 +41,7 @@ public class SocielController {
     public ResponseEntity<?> update(@PathVariable Long id,
                                     @RequestBody SocielDTO socielDTO) {
         Sociel sociel = socielService.update(id, socielDTO);
-        return ResponseEntity.ok(ApiResponeUtils.successRespone(SocielMapper.INSTANCE.mapToSocielDTO(sociel)));
+        return ResponseEntity.ok(ApiResponeUtils.successRespone(socielMapper.mapToSocielDTO(sociel)));
     }
 
     @DeleteMapping("/{id}")

@@ -16,4 +16,7 @@ public class ResumeDTO {
     private List<ExperienceDTO> experienceRequest;
     @JsonProperty("education_info")
     private List<EducationDTO> educationReequest;
+
+    @JsonProperty("profile_id")
+    private long userProfileId;
 }

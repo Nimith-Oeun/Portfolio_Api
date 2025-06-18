@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,6 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import java.io.IOException;
 
 @RequiredArgsConstructor
+@Slf4j
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
@@ -62,7 +64,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         LoginRespone loginRespone = LoginRespone.builder()
                 .firstName(userProfile.getFirstName())
                 .lastName(userProfile.getLastName())
-                .username(userProfile.getUsername())
+                .username(userProfile.getFirstName() + userProfile.getLastName())
                 .email(userProfile.getEmail())
                 .phoneNumber(userProfile.getPhoneNumber())
                 .dateOfBirth(userProfile.getDateOfBirth())
@@ -74,6 +76,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
                 .profileDescription(userProfile.getProfileDescription())
                 .subjectDescription(userProfile.getSubjectDescription())
                 .build();
+
+        log.info("User {} logged in successfully", userProfile.getUsername());
 
         response.setContentType("application/json");
         response.getWriter().write(

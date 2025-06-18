@@ -7,15 +7,13 @@ import com.personal.portfolio_api.dto.ResumeResponeDTO;
 import com.personal.portfolio_api.exception.BadRequestException;
 import com.personal.portfolio_api.exception.InternalServerError;
 import com.personal.portfolio_api.exception.ResoureNoteFoundException;
+import com.personal.portfolio_api.mapper.ObjectResumeMapper;
 import com.personal.portfolio_api.mapper.ResumeMapper;
 import com.personal.portfolio_api.model.Education;
 import com.personal.portfolio_api.model.Experienc;
 import com.personal.portfolio_api.model.Resume;
 import com.personal.portfolio_api.model.Summary;
-import com.personal.portfolio_api.repository.EducationRepository;
-import com.personal.portfolio_api.repository.ExperiencRepository;
-import com.personal.portfolio_api.repository.ResumeRepository;
-import com.personal.portfolio_api.repository.SummaryRepository;
+import com.personal.portfolio_api.repository.*;
 import com.personal.portfolio_api.service.ResumeService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +30,7 @@ import java.util.Objects;
 public class ResumeServiceImpl implements ResumeService {
 
     private final ResumeRepository resumeRepository;
+    private final ObjectResumeMapper objectResumeMapper;
     private final ResumeMapper resumeMapper;
     private final EducationRepository educationRepository;
     private final SummaryRepository summaryRepository;
@@ -80,7 +79,7 @@ public class ResumeServiceImpl implements ResumeService {
 
 //            Todo: Save education
             if (resumeDTO.getEducationReequest() != null) {
-                List<Education> education = resumeMapper.mapToEducation(resumeDTO.getEducationReequest());
+                List<Education> education = objectResumeMapper.mapToEducation(resumeDTO.getEducationReequest());
                 List<Education> educationList = education.stream()
                         .peek(edu -> edu.setResumeId(resume))
                         .toList();
@@ -89,7 +88,7 @@ public class ResumeServiceImpl implements ResumeService {
 
 //            Todo: Save experience;
             if (resumeDTO.getExperienceRequest() != null) {
-                List<Experienc> experienc = resumeMapper.mapToExperience(resumeDTO.getExperienceRequest());
+                List<Experienc> experienc = objectResumeMapper.mapToExperience(resumeDTO.getExperienceRequest());
                 List<Experienc> experiencList = experienc.stream()
                         .peek(ex -> ex.setResumeId(resume))
                         .toList();
@@ -98,7 +97,7 @@ public class ResumeServiceImpl implements ResumeService {
 
 //            Todo: Save summary
             if (resumeDTO.getSummaryRequest() != null) {
-                Summary summary = resumeMapper.mapToSummary(resumeDTO.getSummaryRequest());
+                Summary summary = objectResumeMapper.mapToSummary(resumeDTO.getSummaryRequest());
                 summary.setResumeId(resume);
                 summaryRepository.save(summary);
             }
@@ -133,9 +132,9 @@ public class ResumeServiceImpl implements ResumeService {
 
        return ResumeResponeDTO.builder()
                 .resumeDescription(resumeList.getFirst().getResumeDescription())
-                .education(resumeMapper.mapToEducationReespone(educationList))
-                .experience(resumeMapper.mapToExperienceReespone(experiencList))
-                .summary(resumeMapper.mapToSummaryResponeDTO(summaryList))
+                .education(objectResumeMapper.mapToEducationReespone(educationList))
+                .experience(objectResumeMapper.mapToExperienceReespone(experiencList))
+                .summary(objectResumeMapper.mapToSummaryResponeDTO(summaryList))
                 .build();
     }
 

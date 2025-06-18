@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface UserProfileService {
     Optional<UserProfile> findByEmail(String email);
     UserProfile updateUserProfile(Long id, UserProfileRequest userProfileRequest);
+    UserProfile getUserProfileById(Long id);
     UserProfile createUserProfile(RegisterRequest registerRequest);
     String confirmToken(String token);
 }

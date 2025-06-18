@@ -15,5 +15,8 @@ public class Resume extends BaseEntity{
     @Column(name = "resume_Description")
     private String resumeDescription;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private UserProfile userProfile;
+
 
 }

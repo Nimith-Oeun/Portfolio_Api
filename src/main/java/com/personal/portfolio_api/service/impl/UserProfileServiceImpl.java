@@ -6,6 +6,7 @@ import com.personal.portfolio_api.dto.LoginRequest;
 import com.personal.portfolio_api.dto.RegisterRequest;
 import com.personal.portfolio_api.dto.UserProfileRequest;
 import com.personal.portfolio_api.enumerat.Role;
+import com.personal.portfolio_api.exception.ResoureNoteFoundException;
 import com.personal.portfolio_api.model.ConfirmationToken;
 import com.personal.portfolio_api.model.UserProfile;
 import com.personal.portfolio_api.repository.ProfileRepository;
@@ -107,6 +108,12 @@ public class UserProfileServiceImpl implements UserProfileService {
         userProfile.setSubjectDescription(userProfileRequest.getSubjectDescription());
 
         return profileRepository.save(userProfile);
+    }
+
+    @Override
+    public UserProfile getUserProfileById(Long id) {
+        return profileRepository.findById(id)
+                .orElseThrow(() -> new ResoureNoteFoundException("User profile not found with id: " + id));
     }
 
     @Override

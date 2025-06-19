@@ -5,6 +5,7 @@ import com.personal.portfolio_api.Email.EmailSender;
 import com.personal.portfolio_api.dto.LoginRequest;
 import com.personal.portfolio_api.dto.RegisterRequest;
 import com.personal.portfolio_api.dto.UserProfileRequest;
+import com.personal.portfolio_api.dto.UserProfileRespone;
 import com.personal.portfolio_api.enumerat.Role;
 import com.personal.portfolio_api.exception.ResoureNoteFoundException;
 import com.personal.portfolio_api.model.ConfirmationToken;
@@ -122,8 +123,8 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public List<UserProfile> getAllUserProfiles() {
-        return profileRepository.findAll();
+    public List<UserProfileRespone> getAllUserProfiles() {
+        return profileRepository.getUserInfo();
     }
 
     @Override

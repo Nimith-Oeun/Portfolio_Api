@@ -125,6 +125,11 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public ResumeResponeDTO getAllResumes() {
+
+        if (resumeRepository.findAll().isEmpty()){
+            throw new ResoureNoteFoundException("No resumes created yet");
+        }
+
         List<Resume> resumeList = resumeRepository.findAll();
         List<Summary> summaryList = summaryRepository.findAll();
         List<Education> educationList = educationRepository.findAll();

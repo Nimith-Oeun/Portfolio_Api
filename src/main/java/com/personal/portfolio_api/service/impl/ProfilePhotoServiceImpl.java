@@ -1,8 +1,10 @@
 package com.personal.portfolio_api.service.impl;
 
+import com.personal.portfolio_api.dto.ProfilePhotoDTO;
 import com.personal.portfolio_api.enumerat.FileType;
 import com.personal.portfolio_api.exception.ResoureNoteFoundException;
 import com.personal.portfolio_api.exceptionHandle.PhotoHandle;
+import com.personal.portfolio_api.mapper.PhotoMapper;
 import com.personal.portfolio_api.model.ProfilePhoto;
 import com.personal.portfolio_api.repository.ProfilePhotoRepository;
 import com.personal.portfolio_api.service.ProfilePhotoService;
@@ -23,17 +25,19 @@ public class ProfilePhotoServiceImpl implements ProfilePhotoService {
 
     private final ProfilePhotoRepository profilePhotoRepository;
     private final PhotoHandle PhotoHandle;
+    private final PhotoMapper photoMapper;
 
     private static final String FILE_UPLOAD_PATH = System.getProperty("user.dir") + "/upload/profilePhoto/";
 
     @Override
-    public ProfilePhoto uploadProfile(MultipartFile file) {
+    public ProfilePhoto uploadProfile(MultipartFile file , ProfilePhotoDTO profilePhotoDTO) {
 
         PhotoHandle.validateUploadFile(file);
         PhotoHandle.validateFileFormat(file);
 
         try {
             ProfilePhoto profilePhoto = new ProfilePhoto();
+            ProfilePhoto userId = photoMapper.mapToProfilePhoto(profilePhotoDTO);
 
             var name = FilenameUtils.removeExtension(file.getOriginalFilename());
             var extensionName = FileExtencion.getExtension(file.getOriginalFilename());
@@ -47,6 +51,7 @@ public class ProfilePhotoServiceImpl implements ProfilePhotoService {
             profilePhoto.setFileType(String.valueOf(FileType.PHOTO));
             profilePhoto.setFileName(name);
             profilePhoto.setPartUpload(FILE_UPLOAD_PATH + fileName);
+            profilePhoto.setUserProfileID(userId.getUserProfileID());
 
             return profilePhotoRepository.save(profilePhoto);
 

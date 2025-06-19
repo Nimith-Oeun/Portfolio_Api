@@ -1,8 +1,10 @@
 package com.personal.portfolio_api.service.impl;
 
+import com.personal.portfolio_api.dto.CoverPhotoDTO;
 import com.personal.portfolio_api.enumerat.FileType;
 import com.personal.portfolio_api.exception.ResoureNoteFoundException;
 import com.personal.portfolio_api.exceptionHandle.PhotoHandle;
+import com.personal.portfolio_api.mapper.PhotoMapper;
 import com.personal.portfolio_api.model.CoverPhoto;
 import com.personal.portfolio_api.repository.CoverPhotoRepository;
 import com.personal.portfolio_api.service.CoverPhotoService;
@@ -23,17 +25,19 @@ public class CoverPhotoServiceImpl implements CoverPhotoService {
 
     private final CoverPhotoRepository coverPhotoRepository;
     private final PhotoHandle PhotoHandle;
+    private final PhotoMapper photoMapper;
 
     private static final String FILE_UPLOAD_PATH = System.getProperty("user.dir") + "/upload/coverPhoto/";
 
     @Override
-    public CoverPhoto uploadCover(MultipartFile file) {
+    public CoverPhoto uploadCover(MultipartFile file , CoverPhotoDTO coverPhotoDTO) {
 
         PhotoHandle.validateUploadFile(file);
         PhotoHandle.validateFileFormat(file);
 
         try {
             CoverPhoto coverPhoto = new CoverPhoto();
+            CoverPhoto userId = photoMapper.mapToCoverPhoto(coverPhotoDTO);
 
             var namePhoto = FilenameUtils.removeExtension(file.getOriginalFilename());
             var extensionName = FileExtencion.getExtension(file.getOriginalFilename());
@@ -47,6 +51,7 @@ public class CoverPhotoServiceImpl implements CoverPhotoService {
             coverPhoto.setFileType(String.valueOf(FileType.PHOTO));
             coverPhoto.setFileName(namePhoto);
             coverPhoto.setPartUpload(FILE_UPLOAD_PATH + fileName);
+            coverPhoto.setUserProfileID(userId.getUserProfileID());
             
             return coverPhotoRepository.save(coverPhoto);
             

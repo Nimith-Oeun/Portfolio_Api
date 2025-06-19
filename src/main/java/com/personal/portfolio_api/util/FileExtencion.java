@@ -1,3 +1,7 @@
+/*
+    * this file used for getting file extension from file name.
+ */
+
 package com.personal.portfolio_api.util;
 
 public class FileExtencion {

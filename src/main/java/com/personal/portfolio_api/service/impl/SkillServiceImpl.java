@@ -3,6 +3,7 @@ package com.personal.portfolio_api.service.impl;
 import com.personal.portfolio_api.dto.SkillDTO;
 import com.personal.portfolio_api.enumerat.FileType;
 import com.personal.portfolio_api.exceptionHandle.PhotoHandle;
+import com.personal.portfolio_api.mapper.PhotoMapper;
 import com.personal.portfolio_api.model.Skill;
 import com.personal.portfolio_api.repository.SkillRepository;
 import com.personal.portfolio_api.service.SkillService;
@@ -22,6 +23,7 @@ public class SkillServiceImpl implements SkillService {
 
     private final SkillRepository skillRepository;
     private final PhotoHandle photoHandle;
+    private final PhotoMapper photoMapper;
 
     private static final String FILE_UPLOAD_PATH = System.getProperty("user.dir") + "/upload/skill_logo/";
 
@@ -34,6 +36,7 @@ public class SkillServiceImpl implements SkillService {
 
         try{
             Skill skill = new Skill();
+            Skill userId = photoMapper.mapToSkill(skillDTO);
 
             var name = FilenameUtils.removeExtension(file.getOriginalFilename());
             var extensionName = FileExtencion.getExtension(file.getOriginalFilename());
@@ -47,7 +50,8 @@ public class SkillServiceImpl implements SkillService {
             skill.setFileSize(file.getSize());
             skill.setPartUpload(FILE_UPLOAD_PATH + fileName);
             skill.setFileType(String.valueOf(FileType.LOGO));
-            skill.setSkillTitle(skillDTO.getTitleName());
+            skill.setSkillTitle(skillDTO.getSkillTitle());
+            skill.setUserProfileID(userId.getUserProfileID());
 
             return skillRepository.save(skill);
 

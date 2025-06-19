@@ -23,4 +23,8 @@ public class Project {
 
     @OneToOne(fetch = FetchType.LAZY)
     private ProjectPhoto projectPhoto;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_profile_id")
+    private UserProfile userProfile;
 }

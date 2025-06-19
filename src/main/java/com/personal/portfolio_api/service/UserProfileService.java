@@ -3,6 +3,7 @@ package com.personal.portfolio_api.service;
 import com.personal.portfolio_api.dto.LoginRequest;
 import com.personal.portfolio_api.dto.RegisterRequest;
 import com.personal.portfolio_api.dto.UserProfileRequest;
+import com.personal.portfolio_api.dto.UserProfileRespone;
 import com.personal.portfolio_api.model.UserProfile;
 import org.springframework.security.core.Authentication;
 
@@ -14,6 +15,6 @@ public interface UserProfileService {
     UserProfile updateUserProfile(Long id, UserProfileRequest userProfileRequest);
     UserProfile getUserProfileById(Long id);
     UserProfile createUserProfile(RegisterRequest registerRequest);
-    List<UserProfile> getAllUserProfiles();
+    List<UserProfileRespone> getAllUserProfiles();
     String confirmToken(String token);
 }

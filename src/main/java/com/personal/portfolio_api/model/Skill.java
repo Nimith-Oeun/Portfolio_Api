@@ -29,4 +29,8 @@ public class Skill extends BaseEntity{
 
     @Column(name = "skill_Title")
     private String skillTitle;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_profile_id")
+    private UserProfile userProfileID;
 }

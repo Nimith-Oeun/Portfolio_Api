@@ -26,4 +26,8 @@ public class ProfilePhoto extends BaseEntity{
 
     @Column(name = "Part_Upload")
     private String partUpload;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_profile_id")
+    private UserProfile userProfileID;
 }

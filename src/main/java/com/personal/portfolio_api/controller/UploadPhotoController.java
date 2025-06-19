@@ -1,6 +1,8 @@
 package com.personal.portfolio_api.controller;
 
 
+import com.personal.portfolio_api.dto.CoverPhotoDTO;
+import com.personal.portfolio_api.dto.ProfilePhotoDTO;
 import com.personal.portfolio_api.dto.SocielDTO;
 import com.personal.portfolio_api.exception.ApiResponeUtils;
 import com.personal.portfolio_api.mapper.SocielMapper;
@@ -31,11 +33,11 @@ public class UploadPhotoController {
 
 
     @PostMapping(path = "/profile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> uploadProfile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> uploadProfile(@RequestParam("file") MultipartFile file , ProfilePhotoDTO profilePhotoDTO) {
 
         try{
             log.info("Uploading profile photo" + file.getOriginalFilename());
-            profilePhotoService.uploadProfile(file);
+            profilePhotoService.uploadProfile(file , profilePhotoDTO);
             return ResponseEntity.ok(ApiResponeUtils.successRespone("File uploaded successfully"));
         }catch (Exception e){
             log.info("Error occurred while uploading photo: {}", e.getMessage());
@@ -44,11 +46,11 @@ public class UploadPhotoController {
     }
 
     @PostMapping(path = "/cover" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> uploadCover(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> uploadCover(@RequestParam("file") MultipartFile file , CoverPhotoDTO coverPhotoDTO) {
 
         try{
             log.info("Uploading cover photo" + file.getOriginalFilename());
-            coverPhotoService.uploadCover(file);
+            coverPhotoService.uploadCover(file , coverPhotoDTO);
             return ResponseEntity.ok(ApiResponeUtils.successRespone("File uploaded successfully"));
         }catch (Exception e){
             log.info("Error occurred while uploading photo: " + e.getMessage());

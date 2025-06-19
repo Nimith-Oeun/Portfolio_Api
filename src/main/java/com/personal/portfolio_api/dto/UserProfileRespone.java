@@ -1,9 +1,13 @@
 package com.personal.portfolio_api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserProfileRespone {
 
     private String firstName;
@@ -24,7 +28,7 @@ public class UserProfileRespone {
 
     private String city;
 
-    private String freelance ;
+    private boolean freelance ;
 
     private String subject;
 

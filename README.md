@@ -12,6 +12,11 @@
 
 ## Server Sending Email 📧
 
+
+![image](https://github.com/user-attachments/assets/757d7413-c4a8-44f9-9a02-bb03a3c6a865)
+
+
+
 ## Docker Run
 
 If you want to use MailDev with [Docker](https://www.docker.com/), you can use the

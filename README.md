@@ -1,0 +1,11 @@
+This project has implement
+- Swagger
+- Jackson Config TimeStamp
+- Spring Security basic auth with comfirm token by send Email
+- maildev for server sending email
+- upload file (Photo)
+- configuration propertie.yml for development (QA & Production)
+- custome query in repository
+- configuration audition entity for create or update by dynamic user
+- configuration mapper when duplicat signatur with service using varible String
+- custome Exception handle

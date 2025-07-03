@@ -1,6 +1,7 @@
 package com.personal.portfolio_api.service.impl;
 
 import com.personal.portfolio_api.dto.SocielDTO;
+import com.personal.portfolio_api.exception.BadRequestException;
 import com.personal.portfolio_api.exception.ResoureNoteFoundException;
 import com.personal.portfolio_api.exceptionHandle.HandleText;
 import com.personal.portfolio_api.mapper.SocielMapper;
@@ -51,16 +52,16 @@ public class SocielServiceImpl implements SocielService {
         handleText.HandleText(socielDTO.getLinkedIn());
 
         if (socielRepository.findByFacebook(socielDTO.getFacebook()).isPresent()){
-            throw new RuntimeException("Facebook is already exist");
+            throw new BadRequestException("Facebook is already exist");
         }
         if (socielRepository.findByInstagram(socielDTO.getInstagram()).isPresent()){
-            throw new RuntimeException("Instagram is already exist");
+            throw new BadRequestException("Instagram is already exist");
         }
         if (socielRepository.findByTwitter(socielDTO.getTwitter()).isPresent()){
-            throw new RuntimeException("Twitter is already exist");
+            throw new BadRequestException("Twitter is already exist");
         }
         if (socielRepository.findByLinkedInIs(socielDTO.getLinkedIn()).isPresent()){
-            throw new RuntimeException("LinkedIn is already exist");
+            throw new BadRequestException("LinkedIn is already exist");
         }
 
         socielId.setFacebook(socielDTO.getFacebook());

@@ -25,13 +25,13 @@ public class SummaryServiceImpl implements SummaryService {
 
         if (summaryDTO.getEmail() != null){
             if (!summaryDTO.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-                throw new InternalServerError("Email " + summaryDTO.getEmail() + " is not Email format");
+                throw new BadRequestException("Email " + summaryDTO.getEmail() + " is not Email format");
             }
         }
 
         if (summaryDTO.getPhoneNumber() != null){
             if (!summaryDTO.getPhoneNumber().matches("^[0-9]{9,10}$")) {
-                throw new InternalServerError("Phone number " + summaryDTO.getPhoneNumber() + " is not Phone number format");
+                throw new BadRequestException("Phone number " + summaryDTO.getPhoneNumber() + " is not Phone number format");
             }
         }
 

@@ -7,6 +7,7 @@ import com.personal.portfolio_api.dto.RegisterRequest;
 import com.personal.portfolio_api.dto.UserProfileRequest;
 import com.personal.portfolio_api.dto.UserProfileRespone;
 import com.personal.portfolio_api.enumerat.Role;
+import com.personal.portfolio_api.exception.BadRequestException;
 import com.personal.portfolio_api.exception.ResoureNoteFoundException;
 import com.personal.portfolio_api.model.ConfirmationToken;
 import com.personal.portfolio_api.model.UserProfile;
@@ -39,13 +40,14 @@ public class UserProfileServiceImpl implements UserProfileService {
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
 
-    @Value("${server.port}")
-    private String port;
+    @Value("${spring.confirm-register-token-url}")
+    private String URL_CONFIRM_TOKEN ;
+
 
     @Override
     public Optional<UserProfile> findByEmail(String email) {
         UserProfile userProfile = profileRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User profile not found for email: " + email));
+                .orElseThrow(() -> new ResoureNoteFoundException("User profile not found for email: " + email));
         log.info("User profile found for email: {}", email);
         return Optional.ofNullable(userProfile);
     }
@@ -55,7 +57,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
         if (profileRepository.existsByEmail(registerRequest.getEmail())) {
             log.error("User profile already exists for email: {}", registerRequest.getEmail());
-            throw new RuntimeException("User profile already exists for email: " + registerRequest.getEmail());
+            throw new BadRequestException("User profile already exists for email: " + registerRequest.getEmail());
         }
 
         UserProfile userProfile = new UserProfile();
@@ -64,6 +66,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         userProfile.setLastName(registerRequest.getLastName());
         userProfile.setUsername(registerRequest.getUsername());
         userProfile.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        userProfile.setEnabled(false);
         userProfile.setRole(Role.ADMIN);
 
         profileRepository.save(userProfile);
@@ -85,7 +88,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         /*
             TODO: send to Email
          */
-        String link = "http://localhost:"+ port +"/api/v1/portfolio/auth/confirm?token=" + token;
+        String link = URL_CONFIRM_TOKEN  + token;
         emailSender.send(
                 registerRequest.getEmail(),
                 EmailPlatform.buildEmail(registerRequest.getFirstName(),link)
@@ -98,7 +101,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     public UserProfile updateUserProfile(Long id, UserProfileRequest userProfileRequest) {
 
         UserProfile userProfile = profileRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User profile not found with id: " + id));
+                .orElseThrow(() -> new ResoureNoteFoundException("User profile not found with id: " + id));
 
         userProfile.setFirstName(userProfileRequest.getFirstName());
         userProfile.setLastName(userProfileRequest.getLastName());

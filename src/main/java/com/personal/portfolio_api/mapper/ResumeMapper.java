@@ -1,13 +1,8 @@
 package com.personal.portfolio_api.mapper;
 
 import com.personal.portfolio_api.dto.*;
-import com.personal.portfolio_api.model.Education;
-import com.personal.portfolio_api.model.Experienc;
 import com.personal.portfolio_api.model.Resume;
-import com.personal.portfolio_api.model.Summary;
-import com.personal.portfolio_api.service.ResumeService;
 import com.personal.portfolio_api.service.UserProfileService;
-import org.apache.catalina.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

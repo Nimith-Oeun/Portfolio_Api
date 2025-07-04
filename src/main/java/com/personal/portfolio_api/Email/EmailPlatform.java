@@ -1,8 +1,5 @@
 package com.personal.portfolio_api.Email;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public class EmailPlatform {
 
     public static String buildEmail(String name, String link) {

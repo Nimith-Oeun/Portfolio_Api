@@ -7,7 +7,7 @@ MyServer:
   PORT: 8091
   Database:
     HOST: localhost:5432
-    DBNAME: portfolio
+    DBNAME: Portfolio
     USER: postgres
     PASS: "P@ssw0rd()SQL"
 

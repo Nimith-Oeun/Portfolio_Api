@@ -10,7 +10,7 @@ server:
 
 spring:
   profiles:
-    active: pro
+    active: dev
   application:
     name: portfolio_API
 

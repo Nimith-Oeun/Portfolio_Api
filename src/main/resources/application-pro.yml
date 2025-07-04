@@ -1,10 +1,10 @@
-#========================================================
-# QA Configuration environment.
-#========================================================
+#=========================================================================
+# Production Configuration environment.
+#=========================================================================
 
 #Database configuration
 MyServer:
-  PORT: 8080
+  PORT: 9090
   Database:
     HOST: localhost:5432
     DBNAME: portfolio
@@ -14,7 +14,7 @@ MyServer:
 
 #Link to confirm register token
 Url:
-  TOKEN_CONFIRM_REGISTER: http://localhost:8080/portfolio_API/api/v1/portfolio/auth/confirm?token=
+  TOKEN_CONFIRM_REGISTER: http://192.168.100.100:8080/portfolio_API/api/v1/portfolio/auth/confirm?token=
 
 
 #Store file upload configuration

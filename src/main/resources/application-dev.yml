@@ -1,3 +1,8 @@
+#===================================================================
+# development Configuration environment
+#===================================================================
+
+#Database configuration
 MyServer:
   PORT: 8091
   Database:
@@ -6,6 +11,17 @@ MyServer:
     USER: postgres
     PASS: "P@ssw0rd()SQL"
 
+
+#Link to confirm register token
+Url:
+  TOKEN_CONFIRM_REGISTER: http://localhost:8091/api/v1/portfolio/auth/confirm?token=
+
+#Store file upload configuration
+StoredFiles:
+  PATH: /home/portfolio_File/uploads
+
+
+#Email configuration
 MyEmail:
   mail:
     host: localhost

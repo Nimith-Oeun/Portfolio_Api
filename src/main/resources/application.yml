@@ -1,10 +1,16 @@
+#===================================================================
 # Spring Boot application configuration for development environment
+#===================================================================
+
+#server configuration
 server:
   port: ${MyServer.PORT}
+#  servlet:
+#    context-path: /portfolio_API-0.0.1-SNAPSHOT
 
 spring:
   profiles:
-    active: qa
+    active: pro
   application:
     name: portfolio_API
 
@@ -15,12 +21,13 @@ spring:
     password: "${MyServer.Database.PASS}"
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+
 
   # Email configuration
   mail:
@@ -40,3 +47,15 @@ spring:
           connectiontimeout: ${MyEmail.mail.properties.mail.smtp.connectiontimeout}
           timeout: ${MyEmail.mail.properties.mail.smtp.timeout}
           writetimeout: ${MyEmail.mail.properties.mail.smtp.writetimeout}
+
+  # URL Confirm Register token
+  confirm-register-token-url: ${Url.TOKEN_CONFIRM_REGISTER}
+
+  #Store file upload configuration
+  uploadsPart: ${StoredFiles.PATH}
+
+  # thymeleaf configuration
+  thymeleaf:
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html

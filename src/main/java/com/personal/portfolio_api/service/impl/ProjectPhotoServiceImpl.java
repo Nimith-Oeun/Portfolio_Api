@@ -1,6 +1,8 @@
 package com.personal.portfolio_api.service.impl;
 
 import com.personal.portfolio_api.enumerat.FileType;
+import com.personal.portfolio_api.exception.InternalServerError;
+import com.personal.portfolio_api.exception.ResoureNoteFoundException;
 import com.personal.portfolio_api.exceptionHandle.PhotoHandle;
 import com.personal.portfolio_api.model.ProjectPhoto;
 import com.personal.portfolio_api.repository.ProjectPhotoRepository;
@@ -50,13 +52,13 @@ public class ProjectPhotoServiceImpl implements ProjectPhotoService {
 
         } catch (Exception e) {
             log.error("Error while uploading file: {}", e.getMessage());
-            throw new RuntimeException("Error while uploading file: " + e.getMessage());
+            throw new InternalServerError("Error while uploading file: " + e.getMessage());
         }
     }
 
     @Override
     public ProjectPhoto getProjectPhotoById(Long id) {
     return projectPhotoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Project photo not found with id: " + id));
+            .orElseThrow(() -> new ResoureNoteFoundException("Project photo not found with id: " + id));
     }
 }

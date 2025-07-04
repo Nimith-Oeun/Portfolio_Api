@@ -43,7 +43,8 @@ public class SwaggerConfig {
                     .description("API documentation using Springdoc OpenAPI"))
                 .servers(new ArrayList<>(){{
                     add(new Server().url("http://localhost:" + port).description("Local HOST"));
-                    add(new Server().url("http://192.168.1.167:" + port).description("Laptop Dev Server"));
+                    add(new Server().url("http://localhost:8080/portfolio_API").description("Local server HOST"));
+                    add(new Server().url("http://192.168.100.100:8080/portfolio_API").description("Server"));
                 }});
 
     }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.personal.portfolio_api.dto.LoginRequest;
 import com.personal.portfolio_api.dto.LoginRespone;
 import com.personal.portfolio_api.exception.ApiResponeUtils;
+import com.personal.portfolio_api.exception.BadRequestException;
 import com.personal.portfolio_api.model.UserProfile;
 import com.personal.portfolio_api.repository.ProfileRepository;
 import jakarta.servlet.FilterChain;

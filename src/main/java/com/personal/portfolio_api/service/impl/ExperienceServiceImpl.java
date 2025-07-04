@@ -1,6 +1,7 @@
 package com.personal.portfolio_api.service.impl;
 
 import com.personal.portfolio_api.dto.ExperienceDTO;
+import com.personal.portfolio_api.exception.ResoureNoteFoundException;
 import com.personal.portfolio_api.model.Experienc;
 import com.personal.portfolio_api.repository.ExperiencRepository;
 import com.personal.portfolio_api.service.EducationService;
@@ -20,7 +21,7 @@ public class ExperienceServiceImpl implements ExperienceService {
     @Override
     public Experienc updateExperienc(Long id, ExperienceDTO experienceDTO) {
         Experienc experienceId = experiencRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Experience " + id + " not found"));
+                .orElseThrow(() -> new ResoureNoteFoundException("Experience " + id + " not found"));
 
         experienceId.setCompanyName(experienceDTO.getCompanyName());
         experienceId.setJobTitle(experienceDTO.getJobTitle());

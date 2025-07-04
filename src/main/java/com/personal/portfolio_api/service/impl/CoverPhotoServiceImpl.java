@@ -2,6 +2,7 @@ package com.personal.portfolio_api.service.impl;
 
 import com.personal.portfolio_api.dto.CoverPhotoDTO;
 import com.personal.portfolio_api.enumerat.FileType;
+import com.personal.portfolio_api.exception.InternalServerError;
 import com.personal.portfolio_api.exception.ResoureNoteFoundException;
 import com.personal.portfolio_api.exceptionHandle.PhotoHandle;
 import com.personal.portfolio_api.mapper.PhotoMapper;
@@ -58,7 +59,7 @@ public class CoverPhotoServiceImpl implements CoverPhotoService {
         } catch (IOException e) {
             
             log.error("Error while uploading file: {}", e.getMessage());
-            throw new ResoureNoteFoundException("Error while uploading file: " + e.getMessage());
+            throw new InternalServerError("Error while uploading file: " + e.getMessage());
         }
 
     }

@@ -13,6 +13,7 @@ import com.personal.portfolio_api.util.FileExtencion;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,8 +28,12 @@ public class SkillServiceImpl implements SkillService {
     private final PhotoHandle photoHandle;
     private final PhotoMapper photoMapper;
 
-    private static final String FILE_UPLOAD_PATH = System.getProperty("user.dir") + "/upload/skill_logo/";
+    // Path to the directory where files will be uploaded during development
+//    private static final String FILE_UPLOAD_PATH = System.getProperty("user.dir") + "/upload/skill_logo/";
 
+    // Path to the directory where files will be uploaded server production
+    @Value("${spring.uploadsPart}")
+    private String FILE_UPLOAD_PATH;
 
     @Override
     public Skill uploadSkill(MultipartFile file, SkillDTO skillDTO) {

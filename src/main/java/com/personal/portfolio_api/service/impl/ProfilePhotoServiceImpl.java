@@ -13,6 +13,7 @@ import com.personal.portfolio_api.util.FileExtencion;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +29,12 @@ public class ProfilePhotoServiceImpl implements ProfilePhotoService {
     private final PhotoHandle PhotoHandle;
     private final PhotoMapper photoMapper;
 
-    private static final String FILE_UPLOAD_PATH = System.getProperty("user.dir") + "/upload/profilePhoto/";
+    // Path to the directory where files will be uploaded during development
+//    private static final String FILE_UPLOAD_PATH = System.getProperty("user.dir") + "/upload/profilePhoto/";
+
+    // Path to the directory where files will be uploaded server production
+    @Value("${spring.uploadsPart}")
+    private String FILE_UPLOAD_PATH;
 
     @Override
     public ProfilePhoto uploadProfile(MultipartFile file , ProfilePhotoDTO profilePhotoDTO) {

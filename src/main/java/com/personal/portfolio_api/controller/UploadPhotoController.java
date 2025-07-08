@@ -5,6 +5,7 @@ import com.personal.portfolio_api.dto.CoverPhotoDTO;
 import com.personal.portfolio_api.dto.ProfilePhotoDTO;
 import com.personal.portfolio_api.dto.SocielDTO;
 import com.personal.portfolio_api.exception.ApiResponeUtils;
+import com.personal.portfolio_api.exception.MaxUploadSizeExceededException;
 import com.personal.portfolio_api.mapper.SocielMapper;
 import com.personal.portfolio_api.model.ProfilePhoto;
 import com.personal.portfolio_api.model.Sociel;
@@ -37,6 +38,12 @@ public class UploadPhotoController {
 
         try{
             log.info("Uploading profile photo" + file.getOriginalFilename());
+
+            //handle file size
+            if (file.getSize() > 5 * 1024 * 1024) { // 5 MB limit
+                return ResponseEntity.badRequest().body(new MaxUploadSizeExceededException("File too large! Maximum allowed size is 5MB."));
+            }
+
             profilePhotoService.uploadProfile(file , profilePhotoDTO);
             return ResponseEntity.ok(ApiResponeUtils.successRespone("File uploaded successfully"));
         }catch (Exception e){
@@ -50,6 +57,12 @@ public class UploadPhotoController {
 
         try{
             log.info("Uploading cover photo" + file.getOriginalFilename());
+
+            //handle file size
+            if (file.getSize() > 5 * 1024 * 1024) { // 5 MB limit
+                return ResponseEntity.badRequest().body(new MaxUploadSizeExceededException("File too large! Maximum allowed size is 5MB."));
+            }
+
             coverPhotoService.uploadCover(file , coverPhotoDTO);
             return ResponseEntity.ok(ApiResponeUtils.successRespone("File uploaded successfully"));
         }catch (Exception e){

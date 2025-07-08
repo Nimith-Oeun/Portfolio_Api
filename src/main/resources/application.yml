@@ -10,9 +10,15 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: pro
   application:
     name: portfolio_API
+
+    # configuration for file upload limits
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
 
   # Database configuration
   datasource:

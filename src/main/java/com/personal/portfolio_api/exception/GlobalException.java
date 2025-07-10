@@ -50,4 +50,17 @@ public class GlobalException {
         return ResponseEntity.status(400).body(errorResponse);
     }
 
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<ErrorResponeDTO> handleBadRequestException(MaxUploadSizeExceededException e){
+        log.error("Request Entity Too Large: {}", e.getMessage());
+        ErrorResponeDTO errorResponse = ErrorResponeDTO.builder()
+                .errorCode("413")
+                .statusCode("413")
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .responeData(new EmptyRespone())
+                .build();
+        return ResponseEntity.status(413).body(errorResponse);
+    }
+
 }

@@ -4,6 +4,7 @@ package com.personal.portfolio_api.controller;
 import com.personal.portfolio_api.dto.SkillDTO;
 import com.personal.portfolio_api.exception.ApiResponeUtils;
 import com.personal.portfolio_api.exception.BadRequestException;
+import com.personal.portfolio_api.exception.MaxUploadSizeExceededException;
 import com.personal.portfolio_api.service.SkillService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +28,17 @@ public class UploadSkillController {
 
         try{
             log.info("Uploading profile photo" + file.getOriginalFilename());
+
+            //handle file size
+            if (file.getSize() > 5 * 1024 * 1024) { // 5 MB limit
+                return ResponseEntity.badRequest().body(new MaxUploadSizeExceededException("File too large! Maximum allowed size is 5MB."));
+            }
+
             skillService.uploadSkill(file, skillDTO);
             return ResponseEntity.ok(ApiResponeUtils.successRespone("File uploaded successfully"));
+
         }catch (Exception e){
+
             log.info("Error occurred while uploading photo: {}", e.getMessage());
             return ResponseEntity.badRequest().body(new BadRequestException("File to upload file " + e.getMessage()));
         }

@@ -19,7 +19,7 @@ Url:
 
 #Store file upload configuration
 StoredFiles:
-  PATH: /home/portfolio_File/uploads
+  PATH: /home/portfolio_File/uploads/
 
 
 #Email configuration

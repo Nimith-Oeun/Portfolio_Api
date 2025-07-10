@@ -35,7 +35,7 @@ public class ResumeController {
 
     @GetMapping("")
     public ResponseEntity<?> getAllResumes() {
-        ResumeResponeDTO resumes = resumeService.getAllResumes();
+        List<ResumeResponeDTO> resumes = resumeService.getAllResumes();
         return ResponseEntity.ok(ApiResponeUtils.successRespone(resumes));
     }
 
@@ -63,7 +63,7 @@ public class ResumeController {
     @PutMapping("/{id}/summary")
     public ResponseEntity<?> updateSummary(@PathVariable Long id,
                                            @RequestBody SummaryDTO summaryDTO) {
-        Summary updateSummary = summaryService.updateSummary(id, summaryDTO);
+        summaryService.updateSummary(id, summaryDTO);
         return ResponseEntity.ok(ApiResponeUtils.successRespone(ApiResponeUtils.successRespone(" Update Summary Success")));
     }
 

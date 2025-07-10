@@ -27,5 +27,6 @@ public class Experienc extends BaseEntity{
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Resume resumeId;
+    @JoinColumn(name = "resume_id")
+    private Resume resume;
 }

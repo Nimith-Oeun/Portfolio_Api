@@ -17,7 +17,7 @@ public class EducationServiceImpl implements EducationService {
     private final EducationRepository educationRepository;
 
     @Override
-    public Education updateEducation(Long id, EducationDTO educationDTO) {
+    public void updateEducation(Long id, EducationDTO educationDTO) {
         Education educationId = educationRepository.findById(id)
                 .orElseThrow(() -> new ResoureNoteFoundException("Education " + id + " not found"));
 
@@ -27,7 +27,7 @@ public class EducationServiceImpl implements EducationService {
         educationId.setEndDate(educationDTO.getEndDate());
         educationId.setDescription(educationDTO.getDescription());
 
-        return educationRepository.save(educationId);
+        educationRepository.save(educationId);
 
     }
 }

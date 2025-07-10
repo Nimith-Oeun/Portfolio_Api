@@ -34,7 +34,8 @@ public class Summary extends BaseEntity{
     private SummaryStatus status;
 
     @OneToOne(fetch = FetchType.LAZY)
-    private Resume resumeId;
+    @JoinColumn(name = "resume_id")
+    private Resume resume;
 
 
 

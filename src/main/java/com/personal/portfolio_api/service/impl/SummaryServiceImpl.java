@@ -3,11 +3,9 @@ package com.personal.portfolio_api.service.impl;
 import com.personal.portfolio_api.dto.SummaryDTO;
 import com.personal.portfolio_api.enumerat.SummaryStatus;
 import com.personal.portfolio_api.exception.BadRequestException;
-import com.personal.portfolio_api.exception.InternalServerError;
 import com.personal.portfolio_api.exception.ResoureNoteFoundException;
 import com.personal.portfolio_api.model.Summary;
 import com.personal.portfolio_api.repository.SummaryRepository;
-import com.personal.portfolio_api.service.EducationService;
 import com.personal.portfolio_api.service.SummaryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +19,7 @@ public class SummaryServiceImpl implements SummaryService {
     private final SummaryRepository summaryRepository ;
 
     @Override
-    public Summary updateSummary(Long id, SummaryDTO summaryDTO) {
+    public void updateSummary(Long id, SummaryDTO summaryDTO) {
 
         if (summaryDTO.getEmail() != null){
             if (!summaryDTO.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
@@ -53,7 +51,7 @@ public class SummaryServiceImpl implements SummaryService {
         summaryId.setStatus(SummaryStatus.valueOf(summaryDTO.getStatus()));
         summaryId.setNationality(summaryDTO.getNationality());
 
-        return summaryRepository.save(summaryId);
+        summaryRepository.save(summaryId);
 
     }
 }

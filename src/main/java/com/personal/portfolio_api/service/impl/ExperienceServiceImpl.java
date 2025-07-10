@@ -4,7 +4,6 @@ import com.personal.portfolio_api.dto.ExperienceDTO;
 import com.personal.portfolio_api.exception.ResoureNoteFoundException;
 import com.personal.portfolio_api.model.Experienc;
 import com.personal.portfolio_api.repository.ExperiencRepository;
-import com.personal.portfolio_api.service.EducationService;
 import com.personal.portfolio_api.service.ExperienceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +18,7 @@ public class ExperienceServiceImpl implements ExperienceService {
 
 
     @Override
-    public Experienc updateExperienc(Long id, ExperienceDTO experienceDTO) {
+    public void updateExperienc(Long id, ExperienceDTO experienceDTO) {
         Experienc experienceId = experiencRepository.findById(id)
                 .orElseThrow(() -> new ResoureNoteFoundException("Experience " + id + " not found"));
 
@@ -29,6 +28,6 @@ public class ExperienceServiceImpl implements ExperienceService {
         experienceId.setEndDate(experienceDTO.getEndDate());
         experienceId.setDescription(experienceDTO.getDescription());
 
-        return experiencRepository.save(experienceId);
+        experiencRepository.save(experienceId);
     }
 }

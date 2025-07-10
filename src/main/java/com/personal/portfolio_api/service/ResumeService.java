@@ -15,7 +15,7 @@ public interface ResumeService {
     Resume createResume(ResumeDTO resumeDTO);
     Resume updateResume(Long id, ResumeDTO resumeDTO);
     Resume getResumeById(Long id);
-    ResumeResponeDTO getAllResumes();
+    List<ResumeResponeDTO> getAllResumes();
     void deleteResume(Long id);
 
 
